@@ -155,23 +155,12 @@ void ACList_filter_in_place(ACList *list, ACListContent (*fp)(ACListContent)) {
     if (!list) return;
     if (!list->head) return;
     node = list->head;
-    prev = list->head;
 
     while(node) {
         if (!fp(node->value)) {
-            // TODO leaks memory
-            if (node->next == NULL) {
-                prev->next = NULL;
-            } else {
-                prev->next = node->next->next;
-            }
+            ACList_remove(list, node);
         }
-
-
-
-        prev = node;
         node = node->next;
-
     }
 
 }

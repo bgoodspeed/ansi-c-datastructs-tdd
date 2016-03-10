@@ -186,7 +186,7 @@ int main(void) {
             cmocka_unit_test(list_can_map),
             cmocka_unit_test(list_can_remove_middle),
             cmocka_unit_test(list_can_find_index_of_nodes),
-//            cmocka_unit_test(list_can_filter),
+            cmocka_unit_test(list_can_filter),
 
             cmocka_unit_test(empty_stack_has_zero),
             cmocka_unit_test(stack_can_push_and_pop),
