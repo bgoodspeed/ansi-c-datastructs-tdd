@@ -75,6 +75,39 @@ static void list_can_get_particular_values(void **state) {
     ACList_free(list);
 }
 
+int double_the_value(int v) {
+    return v * 2;
+}
+
+int add_one(int v) {
+    return v + 1;
+}
+
+static void list_can_map(void **state) {
+    ACList *list = ACList_new();
+
+    ACList_insert(list, 101);
+    ACList_insert(list, 102);
+    ACList_insert(list, 103);
+
+    assert_int_equal(101, ACList_get(list, 0));
+    assert_int_equal(102, ACList_get(list, 1));
+    assert_int_equal(103, ACList_get(list, 2));
+
+    ACList_map_in_place(list, double_the_value);
+    assert_int_equal(202, ACList_get(list, 0));
+    assert_int_equal(204, ACList_get(list, 1));
+    assert_int_equal(206, ACList_get(list, 2));
+
+    ACList_map_in_place(list, add_one);
+    assert_int_equal(203, ACList_get(list, 0));
+    assert_int_equal(205, ACList_get(list, 1));
+    assert_int_equal(207, ACList_get(list, 2));
+
+
+    ACList_free(list);
+}
+
 static void list_can_get_particular_values_invalid_idx(void **state) {
     ACList *list = ACList_new();
 
@@ -96,6 +129,7 @@ int main(void) {
             cmocka_unit_test(list_has_length_equal_to_number_of_adds),
             cmocka_unit_test(list_can_get_particular_values),
             cmocka_unit_test(list_can_get_particular_values_invalid_idx),
+            cmocka_unit_test(list_can_map),
 
             cmocka_unit_test(empty_stack_has_zero),
             cmocka_unit_test(stack_can_push_and_pop),

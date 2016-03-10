@@ -31,5 +31,6 @@ void ACList_insert(ACList *list, int value);
 
 ACListContent ACList_get(ACList *list, int index);
 
+void ACList_map_in_place(ACList *list, ACListContent (*fp)(ACListContent));
 
 #endif //ANSIC_LIST_H

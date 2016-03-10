@@ -89,3 +89,17 @@ ACListContent ACList_get(ACList *list, int index) {
     return node->value;
 
 }
+
+
+void ACList_map_in_place(ACList *list, ACListContent (*fp)(ACListContent)) {
+    ACListNode *node;
+    if (!list) return;
+    if (!list->head) return;
+    node = list->head;
+
+    while(node) {
+        node->value = fp(node->value);
+        node = node->next;
+    }
+
+}
